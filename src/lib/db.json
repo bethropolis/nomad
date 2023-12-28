@@ -1,0 +1,33 @@
+{
+  "extensions": {
+    "test": {
+      "reverseChaptersOrder": {
+        "package": "test",
+        "title": "Reverse Order of Chapters",
+        "key": "reverseChaptersOrder",
+        "type": "toggle",
+        "description": "Reverse the order of chapters",
+        "defaultValue": "false",
+        "value": "false"
+      },
+      "mangadex": {
+        "package": "test",
+        "title": "MangaDex API",
+        "key": "mangadex",
+        "type": "input",
+        "description": "MangaDex API URL",
+        "defaultValue": "https://api.mangadex.org",
+        "value": "https://api.mangadex.org"
+      },
+      "lang": {
+        "package": "test",
+        "title": "Language",
+        "key": "lang",
+        "type": "input",
+        "description": "Language",
+        "defaultValue": "en",
+        "value": "en"
+      }
+    }
+  }
+}
