@@ -15,13 +15,21 @@ if (typeof global !== "undefined") {
 const dynamicImport = async () => {
     const module = await import("./test.js");
 
-    console.log(module)
     let comick = new module.default()
-
 
     await comick.load();
 
-     console.log(await comick.latest())
+     let latest = await comick.latest();
+
+     console.log(latest[0]);
+
+     let detail = await comick.detail(latest[0].url);
+
+     console.log(detail.episodes[0])
+
+     let watch = await comick.watch(detail.episodes[0].urls[0].url);
+
+     console.log(watch);
 
 };
 

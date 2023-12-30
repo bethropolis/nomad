@@ -7,7 +7,7 @@
  */
 
 import dataStorage from "./db.js";
-import request from 'umi-request';
+import {request} from "./req.js";
 /**
  * @typedef {Object} Detail
  * @property {string} title
@@ -50,76 +50,53 @@ class Extension {
 
 
 
-    async request(url, options) {
-        try {
-            if (!options) {
-                options = {};
-            }
-            if (!options.headers) {
-                options.headers = { "Miru-Url": this.webSite }; // Assuming 'this.webSite' is defined in your class
-            }
-            if (!options.headers["Miru-Url"]) {
-                options.headers = { ...options.headers, "Miru-Url": this.webSite };
-            }
 
-            const miruProxy = this.proxyUrl + url;
+async request(url, options) {
+    try {
+        options = options || {};
+        options.headers = options.headers || {};
+        options.headers["Miru-Url"] = options.headers["Miru-Url"] || this.webSite;
+        
+        const miruProxy = this.proxyUrl + url;
 
-            console.log(miruProxy, options)
-            const response = await request(miruProxy, options);
-            return response;
-        } catch (error) {
-            console.error('Error making request:', error);
-            throw new Error('Request failed'); // You can handle errors as needed
-        }
+        const response = await request(miruProxy, options);
+        
+        return response;
+    } catch (error) {
+        console.error('Error making request:', error);
+        throw new Error('Request failed');
     }
+}
 
 
-    async getSetting(key) {
-        try {
-            const packageName = this.package; // Assuming 'this.package' contains the package name
-            const setting = await dataStorage.getSetting(packageName, key);
-            if (setting) {
-                return setting; // Return the setting value
-            } else {
-                throw new Error(`Setting with key '${key}' not found`);
-            }
-        } catch (error) {
-            console.error('Error getting setting:', error);
-            throw new Error('Failed to retrieve setting');
-        }
+async getSetting(key) {
+    const packageName = this.package;
+    const setting = await dataStorage.getSetting(packageName, key);
+    if (setting) {
+        return setting;
+    } else {
+        throw new Error(`Setting with key '${key}' not found`);
     }
+}
     
+async registerSetting(setting) {
+    try {
+        await dataStorage.addSettings({
+            package: this.package,
+            ...setting,
+            value: setting.defaultValue,
+        });
 
-
-    /**
-     * Registers a new setting in the database.
-     *
-     * @param {Object} setting - The setting object to be registered.
-     * @param {string} setting.key - The key of the setting.
-     * @param {string} setting.title - The title of the setting.
-     * @param {string} setting.type - The type of the setting.
-     * @param {any} setting.defaultValue - The default value of the setting.
-     * @param {string} setting.description - The description of the setting.
-     * @param {Array} setting.options - The options for the setting (optional).
-     * @return {Promise<void>} - A promise that resolves when the setting is registered successfully.
-     */
-    async registerSetting(setting) {
-        try {
-            // ...existing code...
-            await dataStorage.addSettings({
-                package: this.package,
-                ...setting,
-                value: setting.defaultValue,
-            });
-
-            await dataStorage.write();
-        } catch (error) {
-            console.error('Error registering setting:', error);
-        }
+        await dataStorage.write();
+    } catch (error) {
+        console.error('Error registering setting:', error);
     }
+}
 
 
-    async latest(page) { }
+    async latest(page) {
+        throw new Error('Not implemented');
+     }
 
     /**
      * @param {string} kw
@@ -127,21 +104,27 @@ class Extension {
      * @returns {Promise<ListItem[]>}
      * @abstract
      */
-    async search(kw, page) { }
+    async search(kw, page) {
+        throw new Error('Not implemented');
+     }
 
     /**
      * @param {string} url
      * @returns {Promise<Detail>}
      * @abstract
      */
-    async detail(url) { }
+    async detail(url) {
+        throw new Error('Not implemented');
+     }
 
     /**
      * @param {string} url
      * @returns {Promise<BangumiWatch>}
      * @abstract
      */
-    async watch(url) { }
+    async watch(url) { 
+        throw new Error('Not implemented');
+    }
 
     /**
      * @param {string} url
