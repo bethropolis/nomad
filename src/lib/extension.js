@@ -1,102 +1,105 @@
-/**
- * @typedef {Object} ListItem
- * @property {string} title
- * @property {string} url
- * @property {string} cover
- * @property {string} [update]
- */
+import {ExtensionSettingsDB} from "../db/db.js";
+import { request } from "./req.js";
 
-import dataStorage from "./db.js";
-import {request} from "./req.js";
-/**
- * @typedef {Object} Detail
- * @property {string} title
- * @property {string} cover
- * @property {string} [desc]
- * @property {Object.<string, string>} [metadata]
- * @property {Episode[]} [episodes]
- */
 
 /**
- * @typedef {Object} Episode
- * @property {string} title
- * @property {Array.<{name: string, url: string}>} urls
+ * @typedef {import("../db/db").ExtensionSettings} ExtensionSettings
+ * @typedef {import("../db/db").Extension} ExtensionType
+ * @typedef {import("../types/extension").BangumiWatch} BangumiWatch
+ * @typedef {import("../types/extension").Detail} Detail
+ * @typedef {import("../types/extension").FikushonWatch} FikushonWatch
+ * @typedef {import("../types/extension").ListItem} ListItem
+ * @typedef {import("../types/extension").MangaWatch} MangaWatch
  */
-
-/**
- * @typedef {Object} BangumiWatch
- * @property {'hls' | 'mp4'} type
- * @property {string} url
- */
-
 
 /**
  * @class
  */
+
 class Extension {
-    package = "test";
-    proxyUrl = "https://api.mangadex.org";
-    webSite = "";
-    name = "";
-    version = "";
-    lang = "";
-    script = "";
-    scriptUrl = "";
-    author = "";
-    license = "";
-    description = "";
-    type = "bangumi";
-    nsfw = false;
-
-
-
-
-async request(url, options) {
-    try {
-        options = options || {};
-        options.headers = options.headers || {};
-        options.headers["Miru-Url"] = options.headers["Miru-Url"] || this.webSite;
-        
-        const miruProxy = this.proxyUrl + url;
-
-        const response = await request(miruProxy, options);
-        
-        return response;
-    } catch (error) {
-        console.error('Error making request:', error);
-        throw new Error('Request failed');
+    constructor() {
+        this.package = "";
+        this.proxyUrl = "";
+        this.webSite = "";
+        this.name = "";
+        this.version = "";
+        this.lang = "";
+        this.script = "";
+        this.scriptUrl = "";
+        this.author = "";
+        this.license = "";
+        this.description = "";
+        this.type = "bangumi";
+        this.nsfw = false;
     }
-}
 
 
-async getSetting(key) {
-    const packageName = this.package;
-    const setting = await dataStorage.getSetting(packageName, key);
-    if (setting) {
-        return setting;
-    } else {
-        throw new Error(`Setting with key '${key}' not found`);
+/**
+   * @param {string} url
+   * @param {any} options
+   * @returns {Promise<any>}
+   */
+    async request(url, options) {
+        try {
+            options = options || {};
+            options.headers = options.headers || {};
+            options.headers["Miru-Url"] = options.headers["Miru-Url"] || this.webSite;
+
+            const miruProxy = this.proxyUrl + url;
+
+            const response = await request(miruProxy, options);
+
+            return response;
+        } catch (error) {
+            console.error('Error making request:', error);
+            throw new Error('Request failed');
+        }
     }
-}
-    
-async registerSetting(setting) {
-    try {
-        await dataStorage.addSettings({
-            package: this.package,
+
+
+    /**
+     * Retrieves a setting value from the ExtensionSettingsDB based on the provided key.
+     *
+     * @param {string} key - The key of the setting to retrieve.
+     * @return {Promise<any>} The value of the setting, or null if it doesn't exist.
+     */
+    async getSetting(key) {
+        const settings = await ExtensionSettingsDB.getByKey(this.package, key);
+
+        if (settings) {
+            return settings.value;
+        }
+
+        return null;
+    }
+
+    /**
+     * Registers a setting in the ExtensionSettingsDB.
+     *
+     * @param {ExtensionSettings} setting - The setting to register.
+     * @return {Promise<void>} A promise that resolves when the setting is successfully registered.
+     */
+ 
+   
+    async registerSetting(setting) {
+        await ExtensionSettingsDB.add({
             ...setting,
-            value: setting.defaultValue,
+            value: setting.defaultValue
         });
 
-        await dataStorage.write();
-    } catch (error) {
-        console.error('Error registering setting:', error);
+        
     }
-}
 
 
+    /**
+     * Retrieve the latest data from the specified page.
+     *
+     * @param {number} page - The page number to retrieve data from.
+     * @return {Promise<ListItem[]>} A promise that resolves with the latest data from the specified page.
+     */
     async latest(page) {
         throw new Error('Not implemented');
-     }
+    }
 
     /**
      * @param {string} kw
@@ -106,7 +109,7 @@ async registerSetting(setting) {
      */
     async search(kw, page) {
         throw new Error('Not implemented');
-     }
+    }
 
     /**
      * @param {string} url
@@ -115,31 +118,35 @@ async registerSetting(setting) {
      */
     async detail(url) {
         throw new Error('Not implemented');
-     }
+    }
 
     /**
      * @param {string} url
      * @returns {Promise<BangumiWatch>}
      * @abstract
      */
-    async watch(url) { 
+    async watch(url) {
         throw new Error('Not implemented');
     }
 
     /**
      * @param {string} url
-     * @returns {Promise<string>}
+     * @returns {Promise<void>}
      * @abstract
      */
-    async checkUpdate(url) { }
+    async checkUpdate(url) {
+
+     }
+
+  
 
     /**
-     * @returns {void}
+     * @returns {Promise<void>}
      */
     async unload() { }
 
     /**
-     * @returns {void}
+     * @returns {Promise<void>}
      */
     async load() { }
 

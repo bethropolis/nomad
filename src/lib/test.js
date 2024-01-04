@@ -1,3 +1,4 @@
+
 export default class extends Extension {
     async req(url) {
         return this.request(url, {
