@@ -17,8 +17,8 @@ export const settingsDB = {
    * Get all settings.
    * @returns {Promise<Settings[]>} The array of settings.
    */
-  getAllSettings() {
-    return db.settings.toArray();
+  async getAllSettings() {
+    return await db.settings.toArray();
   },
 
   /**
@@ -26,8 +26,8 @@ export const settingsDB = {
    * @param {string} key - The key of the setting.
    * @returns {Promise<Settings | undefined>} The setting object.
    */
-  getSettings(key) {
-    return db.settings.where("key").equals(key).first();
+  async getSettings(key) {
+    return await db.settings.where("key").equals(key).first();
   },
 
   /**

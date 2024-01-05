@@ -1,5 +1,7 @@
 import {ExtensionSettingsDB} from "../db/db.js";
 import { request } from "./req.js";
+import * as cheerio from 'cheerio';
+
 
 
 /**
@@ -45,9 +47,9 @@ class Extension {
             options.headers = options.headers || {};
             options.headers["Miru-Url"] = options.headers["Miru-Url"] || this.webSite;
 
-            const miruProxy = this.proxyUrl + url;
+            const requestUrl = this.webSite + url;
 
-            const response = await request(miruProxy, options);
+            const response = await request(requestUrl, options);
 
             return response;
         } catch (error) {
@@ -79,15 +81,57 @@ class Extension {
      * @param {ExtensionSettings} setting - The setting to register.
      * @return {Promise<void>} A promise that resolves when the setting is successfully registered.
      */
- 
-   
     async registerSetting(setting) {
         await ExtensionSettingsDB.add({
             ...setting,
+            package: this.package,
             value: setting.defaultValue
         });
 
         
+    }
+
+/**
+ * Retrieves an array of elements that match a given CSS selector in the provided HTML.
+ *
+ * @param {string} html - The HTML content to search within.
+ * @param {string} selector - The CSS selector to match against.
+ * @return {Promise<Array<string>>} An array of elements that match the provided CSS selector.
+ */
+    async querySelectorAll(html, selector) {
+        const $ = cheerio.load(html);
+        return $(selector).toArray();
+    }
+
+    
+    /**
+     * Retrieves the value of the specified attribute from an HTML element
+     * matching the given selector.
+     *
+     * @param {string} html - The HTML content to search in.
+     * @param {string} selector - The CSS selector used to identify the element.
+     * @param {string} attribute - The name of the attribute to retrieve.
+     * @return {Promise<string>} The value of the specified attribute, or undefined if
+     *                  the attribute does not exist.
+     */
+    async getAttributeText(html, selector, attribute) {
+        const $ = cheerio.load(html);
+        const element = $(selector);
+        return element.attr(attribute);
+    }
+
+    
+    /**
+     * Queries for an element in the provided HTML using the given selector.
+     *
+     * @param {string} html - The HTML content to search within.
+     * @param {string} selector - The CSS selector to use for querying the element.
+     * @return {Promise<Object>} - The element matching the provided selector.
+     */
+    async querySelector(html, selector) {
+        const $ = cheerio.load(html);
+        const element = $(selector);
+        return element;
     }
 
 

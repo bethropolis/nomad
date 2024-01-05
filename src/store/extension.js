@@ -41,8 +41,8 @@ export default class ExtensionStore {
             });
         } 
 
-        autorun(() => {
-            this.proxyUrl = settingsStore.getSetting('proxy'); 
+        autorun(async() => {
+            this.proxyUrl = await settingsStore.getSetting('proxy'); 
 
             this.extensionsMap.forEach((extension) => {
                 if (this.proxyUrl) {
@@ -60,7 +60,8 @@ export default class ExtensionStore {
         return new Promise((resolve, reject) => {
             const extensionData = readExtensionMetaData(script);
 
-            if (!extensionData || !verExtensionMateData(extensionData)) {
+
+            if (!extensionData || !verExtensionMateData({...extensionData})) {
                 return reject('Extension metadata error');
             }
 
@@ -68,7 +69,7 @@ export default class ExtensionStore {
             script = `data:text/javascript;base64,${encode(script)}`;
 
             if (isClient()) {
-                import(/* webpackIgnore: true */ script)
+                import(script)
                     .then((module) => {
                         const extension = new module.default();
 

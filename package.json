@@ -37,6 +37,7 @@
 	"dependencies": {
 		"@tailwindcss/forms": "^0.5.7",
 		"axios": "^1.6.3",
+		"cheerio": "^1.0.0-rc.12",
 		"dexie": "^3.2.4",
 		"dotenv": "^16.3.1",
 		"js-base64": "^3.7.5",

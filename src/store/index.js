@@ -20,8 +20,6 @@ export class Store {
          * @type {SettingsStore}
          */
         this.settingsStore = new SettingsStore();
-
-        this.settingsStore.init();
         
         /**
          * @type {ExtensionStore}

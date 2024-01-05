@@ -35,7 +35,6 @@ export function verExtensionMateData(data) {
     !data.name ||
     !data.package ||
     !data.version ||
-    !data.website ||
     !data.type ||
     !data.lang
   ) {

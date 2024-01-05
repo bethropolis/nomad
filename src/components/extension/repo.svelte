@@ -12,8 +12,9 @@
 	let data = writable([]);
 	let isLoading = true;
 
-    console.log(settingsStore.getSetting('repo') + '/index.json')
-	onMount(async () => {
+	const fetchData = async () => {
+		await settingsStore.init(); // Wait for settingsStore initialization
+
 		extensionDB.getAllExtensions().then((extensions) => {
 			const map = new Map();
 			extensions.forEach((extension) => {
@@ -23,13 +24,16 @@
 		});
 
 		try {
-			$data = await request(settingsStore.getSetting('repo') + '/index.json');
+			let repo = await settingsStore.getSetting('repo');
+			$data = await request(repo + '/index.json');
 		} catch (err) {
 			//alert(err);
 		} finally {
 			isLoading = false;
 		}
-	});
+	};
+
+	onMount(fetchData);
 
 	/**
 	 * @param {string} pkg - The package name
@@ -44,7 +48,7 @@
 	 * @param {string} pkg - The name of the package to install.
 	 */
 	const handleInstall = async (pkg) => {
-		const script = await request(`${settingsStore.getSetting('repo')}/repo/${pkg.trim()}.js`);
+		const script = await request(`${await settingsStore.getSetting('repo')}/repo/${pkg.trim()}.js`);
 
 		if (!script) {
 			alert('Package not found!');
@@ -56,7 +60,7 @@
 				setExtensionMapAndUpdateView(pkg, true);
 			})
 			.catch((err) => {
-				alert('error during install');
+				console.error(err);
 			});
 	};
 
@@ -79,14 +83,19 @@
 	};
 </script>
 
+<main class="grid grid-cols-4 gap-4 overflow-scroll p-10">
 
 {#if $data && $data.length > 0}
-
-    {#each $data as item}
-      <ExtensionCard extension={item} on:install={() => handleInstall(item.package)} on:uninstall={() => handleUninstall(item.package)} on:update={() => handleUpdate(item.package)} />
-    {/each}
+	{#each $data as item}
+		<ExtensionCard
+			extension={item}
+			on:install={() => handleInstall(item.package)}
+			on:uninstall={() => handleUninstall(item.package)}
+			on:update={() => handleUpdate(item.package)}
+		/>
+	{/each}
 {/if}
-
+</main>
 <style>
 	/* your styles go here */
 </style>

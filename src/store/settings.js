@@ -28,7 +28,7 @@ export default class SettingsStore {
         /** @ignore */
         makeAutoObservable(this);
         /** @ignore */
-        autorun(() => {
+         autorun(async() => {
             if (isClient()) {
                 // if (this.getSetting('language')) {
                 //     Cookies.set('language', this.getSetting('language'), {
@@ -36,14 +36,14 @@ export default class SettingsStore {
                 //     });
                 // }
 
-                const theme = this.getSetting('theme');
+                const theme = await this.getSetting('theme');
                 const setDark = () => document.documentElement.classList.add('dark');
                 const setLight = () => document.documentElement.classList.remove('dark');
                 if (theme === 'auto') {
                     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
                     prefersDark.matches ? setDark() : setLight();
-                    prefersDark.addEventListener('change', (e) => {
-                        if (this.getSetting('theme') !== 'auto') {
+                    prefersDark.addEventListener('change', async(e) => {
+                        if (await this.getSetting('theme') !== 'auto') {
                             return;
                         }
                         if (e.matches) {
@@ -74,8 +74,8 @@ export default class SettingsStore {
 
         const settings = await settingsDB.getAllSettings();
 
-        settings.forEach((setting) => {
-            this.setSetting(setting.key, setting.value);
+        settings.forEach(async(setting) => {
+            await this.setSetting(setting.key, setting.value);
         });
 
         this.envItems.set('theme', env.PUBLIC_NOMAD_THEME);
@@ -84,9 +84,9 @@ export default class SettingsStore {
         this.envItems.set('TMDBKey', env.PUBLIC_NOMAD_TMDB_KEY);
 
     
-        this.envItems.forEach((value, key) => {
+        this.envItems.forEach(async(value, key) => {
             if (!this.getSetting(key)) { 
-                this.setSetting(key, value);
+                await this.setSetting(key, value);
             }
         });
     }
@@ -94,12 +94,11 @@ export default class SettingsStore {
     /**
      * Gets the value of the setting with the specified key.
      * @param {string} key - The key of the setting.
-     * @returns {any} The value of the setting.
+     * @returns {Promise<any>} The value of the setting.
      */
-    getSetting(key) {
-        // console.log(this.items)
+    async getSetting(key) {
         console.log(this.items.get(key), key)
-        return this.items.get(key);
+       return await this.items.get(key);
     }
 
     /**
@@ -107,9 +106,9 @@ export default class SettingsStore {
      * @param {string} key - The key of the setting.
      * @param {any} value - The value of the setting.
      */
-    setSetting(key, value) {
-        this.items.set(key, value);
-        settingsDB.setSettings(key, value);
+    async setSetting(key, value) {
+        await this.items.set(key, value);
+        await settingsDB.setSettings(key, value);
     }
 
     /**
