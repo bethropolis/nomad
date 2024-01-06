@@ -12,7 +12,7 @@ import * as cheerio from 'cheerio';
  * @typedef {import("../types/extension").FikushonWatch} FikushonWatch
  * @typedef {import("../types/extension").ListItem} ListItem
  * @typedef {import("../types/extension").MangaWatch} MangaWatch
- */
+ */ 
 
 /**
  * @class
@@ -100,7 +100,7 @@ class Extension {
  */
     async querySelectorAll(html, selector) {
         const $ = cheerio.load(html);
-        return $(selector).toArray();
+        return $(selector).toArray(); 
     }
 
     

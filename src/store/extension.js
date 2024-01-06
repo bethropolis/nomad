@@ -75,7 +75,6 @@ export default class ExtensionStore {
 
                         Object.assign(extension, extensionData);
 
-                        extension.proxyUrl = this.proxyUrl || '';
                         extensionDB.addExtension(extensionData);
                         this.setExtension(extension.package, extension);
                         extension.load();

@@ -1,7 +1,7 @@
 import { settingsDB } from '../db/db';
 import { isClient } from '../utils/is-client';
 import { autorun, makeAutoObservable } from 'mobx';
-import { env } from '$env/dynamic/public';
+import { defaulConfig } from '../config';
 
 /***
  * @typedef {import("../db/db").Settings} Settings
@@ -78,14 +78,14 @@ export default class SettingsStore {
             await this.setSetting(setting.key, setting.value);
         });
 
-        this.envItems.set('theme', env.PUBLIC_NOMAD_THEME);
-        this.envItems.set('proxy', env.PUBLIC_NOMAD_PROXY);
-        this.envItems.set('repo', env.PUBLIC_NOMAD_REPOSITORY);
-        this.envItems.set('TMDBKey', env.PUBLIC_NOMAD_TMDB_KEY);
+        this.envItems.set('theme', defaulConfig.theme);
+        this.envItems.set('repo', defaulConfig.repo);
+        this.envItems.set('TMDBKey', defaulConfig.tmdb_key);
+        this.envItems.set('allowed_types', defaulConfig.allowed_types)
 
     
         this.envItems.forEach(async(value, key) => {
-            if (!this.getSetting(key)) { 
+            if (!(await this.getSetting(key))) {
                 await this.setSetting(key, value);
             }
         });
