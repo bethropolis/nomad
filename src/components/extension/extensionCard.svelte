@@ -33,11 +33,14 @@
 	})
 </script>
 
-<Card hoverable>
+<Card>
 	<Card.Content slot="content">
-		<div class="">
+		<div class="min-h-[70px]">
 			<Avatar src={extension.icon} alt={extension.name} class="w-12 h-12" />
-			{extension.name}
+			<span class="text-lg px-2">{extension.name}</span>
+		</div>
+		<div class="flex">
+			<div>version: {extension.version}</div>
 		</div>
 	</Card.Content>
 

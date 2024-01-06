@@ -4,7 +4,6 @@
 	import ExtensionCard from './extensionCard.svelte';
 	import { writable } from 'svelte/store';
 	import { request } from '$lib/req';
-	import { onMount } from 'svelte';
 	import { extensionDB } from '../../db/db';
 
 	const { settingsStore, extensionStore } = new Store();
@@ -15,7 +14,7 @@
 	const fetchData = async () => {
 		await settingsStore.init(); // Wait for settingsStore initialization
 
-		extensionDB.getAllExtensions().then((extensions) => {
+		await extensionDB.getAllExtensions().then((extensions) => {
 			const map = new Map();
 			extensions.forEach((extension) => {
 				map.set(extension.package, true);
@@ -24,16 +23,19 @@
 		});
 
 		try {
-			let repo = await settingsStore.getSetting('repo');
-			$data = await request(repo + '/index.json');
+			const repository = await settingsStore.getSetting('repo');
+			const allowedTypes = await settingsStore.getSetting('allowed_types');
+			console.log("🚀 ~ file: repo.svelte:29 ~ fetchData ~ allowedTypes:", allowedTypes)
+			const response = (await request(repository + '/index.json')) || [];
+			const filteredData = response.filter((item) => allowedTypes.includes(item.type));
+			
+			$data = filteredData;
 		} catch (err) {
 			//alert(err);
 		} finally {
 			isLoading = false;
 		}
 	};
-
-	onMount(fetchData);
 
 	/**
 	 * @param {string} pkg - The package name
@@ -83,19 +85,21 @@
 	};
 </script>
 
-<main class="grid grid-cols-4 gap-4 overflow-scroll p-10">
-
-{#if $data && $data.length > 0}
-	{#each $data as item}
-		<ExtensionCard
-			extension={item}
-			on:install={() => handleInstall(item.package)}
-			on:uninstall={() => handleUninstall(item.package)}
-			on:update={() => handleUpdate(item.package)}
-		/>
-	{/each}
-{/if}
+<main class="grid grid-cols-4 gap-4 w-full h-full overflow-auto p-10">
+	{#await fetchData()}
+		<p>loading..</p>
+	{:then}
+		{#each $data as item}
+			<ExtensionCard
+				extension={item}
+				on:install={() => handleInstall(item.package)}
+				on:uninstall={() => handleUninstall(item.package)}
+				on:update={() => handleUpdate(item.package)}
+			/>
+		{/each}
+	{/await}
 </main>
+
 <style>
 	/* your styles go here */
 </style>

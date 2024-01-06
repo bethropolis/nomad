@@ -2,7 +2,6 @@
 	import '../app.pcss';
 	import {  Layout } from 'stwui';
 	import Sidebar from '../components/sidebar.svelte';
-	import Footer from '../components/footer.svelte';
 </script>
 
 <Layout class="h-screen overflow-hidden">
@@ -15,10 +14,6 @@
 			<Layout.Content>
 				<Layout.Content.Body class="min-h-[200px]"><slot /></Layout.Content.Body>
 			</Layout.Content>
-
-			<Layout.Footer class="static  bg-white text-slate-800 z-0 max-h-[64px]">
-				<Footer />
-			</Layout.Footer>
 		</Layout>
 	</Layout.Content>
 </Layout>
