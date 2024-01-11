@@ -39,12 +39,7 @@ jobs:
            script: |
             const fs = require('fs');
 
-            let changelog;
-            try{
-            changelog = fs.readFileSync('changelog.md', 'utf8');
-            }catch(e){
-              changelog = "no changelog provided";
-            }
+            const changelog = fs.readFileSync('changelog.md', 'utf8');
 
             const { data } = await github.rest.repos.createRelease({
               owner: context.repo.owner,
