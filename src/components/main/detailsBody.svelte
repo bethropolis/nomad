@@ -73,7 +73,7 @@
 	$: console.log(episodes);
 </script>
 
-<div class="grid grid-rows-4 grid-flow-col gap-4 w-full h-full overflow-hidden">
+<div id="details" class="grid grid-rows-4 grid-flow-col gap-4 w-full h-full overflow-hidden">
 	<div class="row-span-4 col-span-3">02</div>
 	<div class="col-span-1 row-span-4">
 		<Select placeholder={selectedOption} on:change={handleChange} {options} class="mb-2">
@@ -99,3 +99,7 @@
 		</List>
 	</div>
 </div>
+
+<style>
+
+</style>
