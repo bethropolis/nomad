@@ -28,6 +28,8 @@ jobs:
           
       - name: run standard-version
         run: standard-version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: create release
         id: create-release
