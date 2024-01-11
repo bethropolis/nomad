@@ -22,10 +22,12 @@ jobs:
           node-version: 18
       - name: get version
         run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
-
+      
+      - name: install standard-version
+        run:  npm i -g standard-version
           
-      - name: create a release build
-        run: yarn run release
+      - name: run standard-version
+        run: standard-version
 
       - name: create release
         id: create-release
