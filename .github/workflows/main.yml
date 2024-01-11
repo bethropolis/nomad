@@ -23,6 +23,7 @@ jobs:
       - name: get version
         run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
 
+          
       - name: create a release build
         run: yarn run release
 
@@ -86,7 +87,14 @@ jobs:
 
       - name: install frontend dependencies
         run: yarn install 
-    
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node_modules-${{hashFiles('yarn.lock')}}
+          restore-keys: node_modules- # Take any latest cache if failed to find it for current yarn.lock
+
 
       - uses: tauri-apps/tauri-action@v0
         env:
