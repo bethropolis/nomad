@@ -66,12 +66,16 @@
 		updateEpisodes();
 	}
 
+	function handleSelect(item) {
+		console.log(item);
+	}
+
 	$: console.log(episodes);
 </script>
 
 <div class="grid grid-rows-4 grid-flow-col gap-4 w-full h-full overflow-hidden">
 	<div class="row-span-4 col-span-3">02</div>
-	<div class="col-span-1">
+	<div class="col-span-1 row-span-4">
 		<Select placeholder={selectedOption} on:change={handleChange} {options} class="mb-2">
 			<Select.Options slot="options">
 				{#each options as option}
@@ -80,7 +84,7 @@
 			</Select.Options>
 		</Select>
 
-		<List bordered class="overflow-y-scroll">
+		<List bordered class="overflow-y-scroll h-full">
 			{#each episodes as item}
 				<List.Item>
 					<a href="#/player" on:click={() => handleSelect(item)}>
