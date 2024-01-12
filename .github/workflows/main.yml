@@ -25,8 +25,8 @@ jobs:
         id: version
         with:
           scheme: semver
-          increment: patch
-
+          increment: 
+          use_api: true
 
       - name: create release
         id: create-release
