@@ -1,7 +1,7 @@
 <script>
+	import { createEventDispatcher, onMount } from 'svelte';
 	import extensionMapStore from '$lib/extensionMap';
 	import { Avatar, Card } from 'stwui';
-	import { createEventDispatcher, onMount } from 'svelte';
 
 	/**
 	 * @typedef {import("../../db/db").Extension} Extension
@@ -13,24 +13,49 @@
 	 */
 	export let extension;
 
+	let state = $extensionMapStore.get(extension.package) ? "uninstall" : "install";
+
+
 	const dispatch = createEventDispatcher();
 
-	const handleInstall = () => {
-		dispatch('install', extension.package);
+	const handleInstall = async () => {
+		state = "installing";
+		await dispatch('install', extension.package);
+		await checkState();
 	};
 
-	const handleUninstall = () => {
-		dispatch('uninstall', extension.package);
+	const handleUninstall = async () => {
+		state = "uninstalling";
+		await dispatch('uninstall', extension.package);
+		await checkState();
 	}
 
-	const handleUpdate = () => {
-		dispatch('update', extension.package);
+	const handleUpdate = async () => {
+		await dispatch('update', extension.package); 
+	}
+
+	const handleClick = () =>{
+		if(state == "install"){
+			handleInstall()
+		}else{
+			handleUninstall();
+		}
 	}
 
 
-	onMount(() => {
-		
+	const checkState = () =>{
+		if($extensionMapStore.get(extension.package)){
+			state = "uninstall"
+		}	
+	}
+
+
+	onMount(async () => {
+		// await checkState()
 	})
+
+
+	$: $extensionMapStore && checkState();
 </script>
 
 <Card>
@@ -46,7 +71,7 @@
 
 	<Card.Actions slot="actions">
 		<Card.Actions.Action>
-			<Card.Actions.Action.Label slot="label" class="text-lg" on:click={handleInstall}>install</Card.Actions.Action.Label>
+			<Card.Actions.Action.Label slot="label" class="text-lg" on:click={handleClick}>{state}</Card.Actions.Action.Label>
 		</Card.Actions.Action>
 	</Card.Actions>
 </Card>

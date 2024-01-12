@@ -4,6 +4,7 @@ export const defaulConfig = {
     "proxy": "",
     "tmdb_key": "",
     "language": "en",
+    "nsfw": false,
     "allowed_types":[
         "bangumi",
         "video"

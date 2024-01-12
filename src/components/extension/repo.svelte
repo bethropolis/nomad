@@ -24,17 +24,33 @@
 
 		try {
 			const repository = await settingsStore.getSetting('repo');
-			const allowedTypes = await settingsStore.getSetting('allowed_types');
-			console.log("🚀 ~ file: repo.svelte:29 ~ fetchData ~ allowedTypes:", allowedTypes)
 			const response = (await request(repository + '/index.json')) || [];
-			const filteredData = response.filter((item) => allowedTypes.includes(item.type));
-			
-			$data = filteredData;
+
+			const filteredData = await Promise.all(
+				response.map(async (item) => {
+					if (await filterRepos(item)) {
+						return item;
+					}
+					return null;
+				})
+			);
+
+			// Remove null items from the array
+			const finalFilteredData = filteredData.filter((item) => item !== null);
+
+			$data = finalFilteredData;
 		} catch (err) {
-			//alert(err);
+			// Handle errors
 		} finally {
 			isLoading = false;
 		}
+	};
+
+	const filterRepos = async (item) => {
+		const allowedTypes = await settingsStore.getSetting('allowed_types'); // Get settings synchronously
+		const nsfw = await settingsStore.getSetting('nsfw');
+
+		return allowedTypes.includes(item.type) && !nsfw && item?.nsfw != 'true';
 	};
 
 	/**

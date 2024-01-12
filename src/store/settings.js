@@ -81,6 +81,8 @@ export default class SettingsStore {
         this.envItems.set('theme', defaulConfig.theme);
         this.envItems.set('repo', defaulConfig.repo);
         this.envItems.set('TMDBKey', defaulConfig.tmdb_key);
+        this.envItems.set('language', defaulConfig.language);
+        this.envItems.set('nsfw', defaulConfig.nsfw);
         this.envItems.set('allowed_types', defaulConfig.allowed_types)
 
     
@@ -97,7 +99,6 @@ export default class SettingsStore {
      * @returns {Promise<any>} The value of the setting.
      */
     async getSetting(key) {
-        console.log(this.items.get(key), key)
        return await this.items.get(key);
     }
 

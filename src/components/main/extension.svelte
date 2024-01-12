@@ -40,7 +40,7 @@
 			<LoadingCards />
 		{:then items}
 			{#each items as item}
-				<a href="#/details" on:click={() => goTodetails(item)}>
+				<a href="#" on:click={() => goTodetails(item)}>
 					<Ecard title={item.title} cover={item.cover} />
 				</a>
 			{/each}

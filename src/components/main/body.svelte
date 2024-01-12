@@ -2,7 +2,8 @@
 	import { onMount } from 'svelte';
 	import { extensionDB } from '../../db/db';
 	import Extension from './extension.svelte';
-	import Details from './details.svelte';
+	import { goto } from '$app/navigation';
+	import { details } from '../../store/store';
 
 	/**
 	 * @typedef {import("../../db/db").Extension} Extension
@@ -19,15 +20,6 @@
 	 */
 	let selected;
     
-	/**
-	 * @type {string}
-	 */
-	let page;
-
-
-	onMount(() => {
-		page = 'home';
-	});
 
 	/**
 	 * @type {Extension[]}
@@ -41,15 +33,16 @@
 	/**
 	 * @param {object} event
 	 * @param {object} event.detail
+	 * @param {string} event.detail.package
+	 * @param {string} event.detail.url
 	 */
 	const switchToDetails = (event) => {
-		selected = event.detail;
-		page = 'details';
+		$details = event.detail;
+		goto('/details');
 	};
     
 </script>
 
-{#if page === 'home'}
 	{#await loadExtensions()}
 		<p>Loading...</p>
 	{:then}
@@ -57,9 +50,6 @@
 			<Extension {extension} on:details={switchToDetails} />
 		{/each}
 	{/await}
-{:else if page === 'details'}
-	<Details {selected} />
-{/if}
 
 <style>
 	/* Your styles go here */

@@ -10,6 +10,7 @@ import { db } from '../db';
  * @property {'bangumi' | 'manga' | 'fikushon'} type
  * @property {string} script
  * @property {string} description
+ * @property {boolean} [nsfw]
  * @property {string} [website]
  * @property {string} [author]
  * @property {string} [icon]

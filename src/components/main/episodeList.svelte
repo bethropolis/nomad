@@ -13,7 +13,6 @@
 	});
 
 	const getItems = async () => {
-		console.log(`loading items from ${items.length}`);
 		return items;
 	};
 
