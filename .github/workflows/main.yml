@@ -20,8 +20,13 @@ jobs:
         with:
           node-version: 18
 
-      - name: get version
-        run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
+      - name: Get next version
+        uses: reecetech/version-increment@2023.9.3
+        id: version
+        with:
+          scheme: semver
+          increment: patch
+
 
       - name: create release
         id: create-release
