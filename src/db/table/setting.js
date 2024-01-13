@@ -43,6 +43,17 @@ export const settingsDB = {
     return db.settings.add({ key, value });
   },
 
+
+    /**
+   * Update settings by key.
+   * @param {string} key - The key of the setting.
+   * @param {*} value - The new value of the setting.
+   * @returns {Promise<number>} The number of modified settings.
+   */
+    async updateSettings(key, value) {
+      return db.settings.where("key").equals(key).modify({ value });
+    },
+
   /**
    * Delete settings by key.
    * @param {string} key - The key of the setting.

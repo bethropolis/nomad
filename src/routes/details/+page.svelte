@@ -1,9 +1,11 @@
 <script >
 	import { page } from '$app/stores';
 	import { details } from '../../store/store';
-	import Details from './../../components/main/details.svelte';
+	import Details from '../../components/details/details.svelte';
 
     let selected = $details;
+
+	
 </script>
 
 
