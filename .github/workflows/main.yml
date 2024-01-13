@@ -20,7 +20,6 @@ jobs:
         with:
           node-version: 18
 
-
       - name: get version
         run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
 
@@ -88,6 +87,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          appName: nomad
+          appVersion: ${{ process.env.PACKAGE_VERSION }}
+          iconPath: static/nomad.png
           releaseId: ${{ needs.create-release.outputs.release_id }}
 
   publish-release:
