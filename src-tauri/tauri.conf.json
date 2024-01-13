@@ -15,6 +15,10 @@
       "all": false,
       "fs": {
         "writeFile": true
+      },
+      "http": {
+        "all": true, 
+        "request": true 
       }
     },
     "bundle": {
