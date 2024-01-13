@@ -4,7 +4,8 @@
 		"beforeBuildCommand": "npm run build",
 		"beforeDevCommand": "npm run dev",
 		"devPath": "http://localhost:5173",
-		"distDir": "../build"
+		"distDir": "../build",
+		"withGlobalTauri": true
 	},
 	"package": {
 		"productName": "nomad",
@@ -19,6 +20,9 @@
 			"http": {
 				"all": true,
 				"request": true
+			},
+			"window": {
+				"create": true
 			}
 		},
 		"bundle": {
@@ -71,7 +75,8 @@
 			},
 			{
 				"width": 400,
-				"height": 200,
+				"height": 400,
+				"resizable": false,
 				"decorations": false,
 				"url": "splashscreen.html",
 				"label": "splashscreen"
