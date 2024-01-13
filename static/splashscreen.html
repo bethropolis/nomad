@@ -70,6 +70,14 @@
     <div class="splash-container">
         <img src="nomad-bw.svg" alt="Nomad Logo" class="splash-image" />
     </div>
+
+    <script>
+        const splash_window = window.__TAURI__.window;
+
+         document.addEventListener('DOMContentLoaded',async () => {
+            await splash_window.center();
+         })
+    </script>
 </body>
 
 </html>

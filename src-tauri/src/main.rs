@@ -15,3 +15,4 @@ fn main() {
     .run(tauri::generate_context!())
     .expect("failed to run app");
 }
+ 
