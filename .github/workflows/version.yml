@@ -14,7 +14,7 @@ jobs:
       - name: Use Node.js 16
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
       - name: Install dependencies
         run: npm ci
@@ -26,3 +26,4 @@ jobs:
         uses: mikeal/publish-to-github-action@master
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            BRANCH_NAME: 'dev'           
