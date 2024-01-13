@@ -23,10 +23,7 @@ jobs:
         run: npm version patch --no-git-tag-version
  
       - name: Commit version change
-        uses: EndBug/add-and-commit@v9
-        with:
-          message: "chore: Bump version to ${{ github.sha }}"
-          add: package.json
-          author_name: version bot
-          author_email: versionbot@no-reply.github.com
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+        uses: mikeal/publish-to-github-action@master
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            BRANCH_NAME: 'dev'
