@@ -27,3 +27,8 @@ export class Store {
         this.extensionStore = new ExtensionStore(this.settingsStore);
     }
 }
+
+
+
+
+

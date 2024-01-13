@@ -50,7 +50,7 @@
 		const allowedTypes = await settingsStore.getSetting('allowed_types'); // Get settings synchronously
 		const nsfw = await settingsStore.getSetting('nsfw');
 
-		return allowedTypes.includes(item.type) && !nsfw && item?.nsfw != 'true';
+		return allowedTypes.includes(item.type) && (nsfw || item?.nsfw != 'true');
 	};
 
 	/**

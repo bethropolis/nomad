@@ -47,7 +47,7 @@ class Extension {
             options.headers = options.headers || {};
             options.headers["Miru-Url"] = options.headers["Miru-Url"] || this.webSite;
 
-            const requestUrl = this.webSite + url;
+            let requestUrl = options.headers["Miru-Url"] + url;
 
             const response = await request(requestUrl, options);
 
