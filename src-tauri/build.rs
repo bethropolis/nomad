@@ -1,4 +1,6 @@
+use tauri;
 use tauri::{Manager, Window};
+
 #[tauri::command]
 async fn close_splashscreen(window: Window) {
   window.get_window("splashscreen").expect("no window labeled 'splashscreen' found").close().unwrap();
