@@ -249,6 +249,11 @@
   dependencies:
     mini-svg-data-uri "^1.2.3"
 
+"@tauri-apps/api@^1.5.3":
+  version "1.5.3"
+  resolved "https://registry.npmjs.org/@tauri-apps/api/-/api-1.5.3.tgz"
+  integrity sha512-zxnDjHHKjOsrIzZm6nO5Xapb/BxqUq1tc7cGkFXsFkGTsSWgCPH1D8mm0XS9weJY2OaR73I3k3S+b7eSzJDfqA==
+
 "@tauri-apps/cli-linux-x64-gnu@1.5.7":
   version "1.5.7"
   resolved "https://registry.npmjs.org/@tauri-apps/cli-linux-x64-gnu/-/cli-linux-x64-gnu-1.5.7.tgz"

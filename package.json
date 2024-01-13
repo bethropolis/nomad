@@ -1,6 +1,6 @@
 {
 	"name": "watch",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
@@ -38,6 +38,7 @@
 	"type": "module",
 	"dependencies": {
 		"@tailwindcss/forms": "^0.5.7",
+		"@tauri-apps/api": "^1.5.3",
 		"axios": "^1.6.3",
 		"cheerio": "^1.0.0-rc.12",
 		"dexie": "^3.2.4",
