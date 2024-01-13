@@ -29,5 +29,4 @@ jobs:
           add: package.json
           author_name: version bot
           author_email: versionbot@no-reply.github.com
-          branch: dev
           github_token: ${{ secrets.GITHUB_TOKEN }}
