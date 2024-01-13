@@ -1,0 +1,33 @@
+name: Increment Package Version
+
+on:
+  push:
+    branches: [dev]  
+
+jobs:
+  increment-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Increment version
+        run: npm version patch 
+
+      - name: Commit version change
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "chore: Bump version to ${{ github.sha }}"
+          add: package.json
+          author_name: version bot
+          author_email: versionbot@no-reply.github.com
+          branch: dev
+          github_token: ${{ secrets.GITHUB_TOKEN }}
