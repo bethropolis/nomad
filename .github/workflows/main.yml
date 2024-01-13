@@ -88,7 +88,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           appName: nomad
-          appVersion: ${{ process.env.PACKAGE_VERSION }}
+          appVersion: $PACKAGE_VERSION
           iconPath: static/nomad.png
           releaseId: ${{ needs.create-release.outputs.release_id }}
 
