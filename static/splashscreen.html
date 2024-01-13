@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nomad</title>
+
+    <style>
+        :root {
+            --background-default: #f0f0f0;
+            --text-default: #333;
+            --background-dark: #333;
+            --text-dark: #fff;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-default: var(--background-dark);
+                --text-default: var(--text-dark);
+            }
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: var(--background-default);
+            color: var(--text-default);
+            transition: background-color 0.5s, color 0.5s; /* Smooth transition for theme change */
+        }
+
+        .splash-container {
+            text-align: center;
+        }
+
+        .splash-image {
+            width: 200px; /* Adjust the size as needed */
+            height: auto;
+            filter: invert(25%) sepia(17%) saturate(148%) hue-rotate(179deg) brightness(25%) contrast(25%);
+            animation: pulse 2s infinite; /* Pulsating animation */
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .splash-image {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="splash-container">
+        <img src="nomad-bw.svg" alt="Nomad Logo" class="splash-image" />
+    </div>
+</body>
+
+</html>
