@@ -69,9 +69,9 @@
 		</div>
 	</Card.Content>
 
-	<Card.Actions slot="actions" class="dark:bg-gray-500">
-		<Card.Actions.Action>
-			<Card.Actions.Action.Label slot="label" class="text-lg" on:click={handleClick}>{state}</Card.Actions.Action.Label>
+	<Card.Actions slot="actions" class="dark:bg-gray-500 ">
+		<Card.Actions.Action class="dak:hover:text-blue-200">
+			<Card.Actions.Action.Label slot="label" class="text-lg dak:hover:text-blue-200" on:click={handleClick}>{state}</Card.Actions.Action.Label>
 		</Card.Actions.Action>
 	</Card.Actions>
 </Card>
