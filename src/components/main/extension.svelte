@@ -1,9 +1,10 @@
 <script>
+	import { createEventDispatcher } from 'svelte';
+	import { Icon } from 'stwui'
 	import Ecard from './showCard.svelte';
 	import controler from '$lib/controler';
 	import LoadingCards from '../common/loadingCards.svelte';
-	import { createEventDispatcher } from 'svelte';
-
+	import {icons} from '$lib/icons';
 	/**
 	 * @typedef {import("../../db/db").Extension} Extension
 	 * @typedef {import("../../types/extension").ListItem} ListItem
@@ -18,20 +19,37 @@
 	 */
 	let data = [];
 
-	let dispach =  createEventDispatcher();
+	let dispach = createEventDispatcher();
 
 	const getLatest = async () => {
 		return (await controler.latest(extension.package)) || [];
 	};
 
+	
+
+	/**
+	 * Navigates to the details page with the specified item.
+	 * @param {Object} item - The item to navigate to the details page with.
+	 * @param {string} item.url - The url of the item.
+	 * @returns {Promise<void>}
+	 */
 	const goTodetails = async (item) => {
-		dispach('details', {package:extension.package, url:item.url});
+		dispach('details', { package: extension.package, url: item.url });
 	};
 </script>
-
+ 
 <div class="flex flex-col px-4 mx-4 my-6 w-full">
-	<div>
-		<div class="font-medium text-2xl max-h-10 text-slate-800 dark:text-slate-200 select-none">{extension.name}</div>
+	<div class="flex items-center">
+		<div
+			class="font-medium py-1 flex-1 text-lg md:text-2xl max-h-10 text-slate-800 dark:text-slate-200 select-none"
+		>
+			{extension.name}
+		</div>
+
+		<button class="px-3 py-1 flex items-center rounded-full hover:bg-gray-600/80">
+			<span>show more</span>
+			<Icon data={icons.next} />
+		</button>
 	</div>
 	<div
 		class="flex flex-row items-stretch w-full h-fit gap-3 flex-nowrap no-scrollbar overflow-x-auto py-3"

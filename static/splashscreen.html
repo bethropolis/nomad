@@ -86,10 +86,12 @@
 			splash_window.center()
 
 			const loadMainWindow = async () => {
-				await invoke('close_splashscreen');
+				let load = await invoke('close_splashscreen');
+				console.log(load);
 			};
 
 			setTimeout(loadMainWindow, 2000);
 		</script>
 	</body>
 </html>
+ 
