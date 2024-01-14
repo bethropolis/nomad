@@ -42,16 +42,16 @@
 </script>
 
 <main class="mx-8">
-	<h1>Settings</h1>
+	<h1 class="dark:text-gray-300">Settings</h1>
 	<div class="">
 		{#each settings as setting}
 			<div class="input-data my-2 w-3/4 flex">
-				<label class="w-3/12 text-lg" for={setting.key}>{setting.key}</label>
+				<label class="w-3/12 text-lg dark:text-slate-200" for={setting.key}>{setting.key}</label>
 				{#if setting.type === 'toggle'}
 					<Toggle bind:on={setting.value} on:click={() => update(setting)} class="w-24" />
 				{:else}
 					<Input
-						class="w-9/12"
+						class="w-9/12 dark:text-gray-300"
 						type="text"
 						id={setting.key}
 						on:keyup={() => update(setting)}

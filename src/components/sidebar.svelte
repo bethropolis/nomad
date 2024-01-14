@@ -33,7 +33,7 @@
     let active = '';
 </script>
 
-<Menu {active} class="text-lg">
+<Menu {active} class="text-lg dark:bg-gray-700">
     {#each items as item}
         {#if item.data}
             <Menu.Item
