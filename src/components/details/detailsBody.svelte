@@ -81,7 +81,7 @@
 	<div class="row-span-4 col-span-3">
 		<DetailsMain {data} />
 	</div>
-	<div class="col-span-1 row-span-4">
+	<div class="col-span-1 row-span-4 dark:bg-gray-600">
 		<Select placeholder={selectedOption} on:change={handleChange} {options} class="mb-2">
 			<Select.Options slot="options">
 				{#each options as option}

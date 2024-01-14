@@ -31,7 +31,7 @@
 
 <div class="flex flex-col px-4 mx-4 my-6 w-full">
 	<div>
-		<div class="font-medium text-2xl max-h-10">{extension.name}</div>
+		<div class="font-medium text-2xl max-h-10 text-slate-800 dark:text-slate-200 select-none">{extension.name}</div>
 	</div>
 	<div
 		class="flex flex-row items-stretch w-full h-fit gap-3 flex-nowrap no-scrollbar overflow-x-auto py-3"

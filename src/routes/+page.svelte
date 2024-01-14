@@ -2,7 +2,7 @@
 	import Body from '../components/main/body.svelte';
 </script>
 
-<main class="overflow-x-hidden overflow-y-auto no-scrollbar w-full h-full">
+<main class="overflow-x-hidden overflow-y-auto no-scrollbar w-full h-full dark:bg-gray-700"> 
 	<Body />
 </main>
  

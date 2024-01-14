@@ -4,10 +4,10 @@
 	import Sidebar from '../components/sidebar.svelte';
 </script>
 
-<Layout class="h-screen overflow-hidden">
+<Layout class="h-screen overflow-hidden dark:bg-gray-700 dark:text-gray-200">
 	<Layout.Content expandedWidth="12rem">
-		<Layout.Content.Sidebar class="flex items-center justify-center h-full bg-gray-100"
-			><Sidebar />
+		<Layout.Content.Sidebar class="flex items-center justify-center h-full bg-gray-100 dark:bg-gray-700">
+			<Sidebar />
 		</Layout.Content.Sidebar>
 		<Layout class="flex flex-col items-center overflow-auto justify-center min-h-[48px]">
 
