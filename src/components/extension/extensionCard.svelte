@@ -58,7 +58,7 @@
 	$: $extensionMapStore && checkState();
 </script>
 
-<Card>
+<Card class="dark:bg-gray-600">
 	<Card.Content slot="content">
 		<div class="min-h-[70px]">
 			<Avatar src={extension.icon} alt={extension.name} class="w-12 h-12" />
@@ -69,7 +69,7 @@
 		</div>
 	</Card.Content>
 
-	<Card.Actions slot="actions">
+	<Card.Actions slot="actions" class="dark:bg-gray-500">
 		<Card.Actions.Action>
 			<Card.Actions.Action.Label slot="label" class="text-lg" on:click={handleClick}>{state}</Card.Actions.Action.Label>
 		</Card.Actions.Action>
