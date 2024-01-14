@@ -4,29 +4,38 @@
 	import { Toggle } from 'stwui';
 	import { settingsDB } from './../../db/table/setting.js';
 
+	/**
+	 * @type {Array<{key: string, value: string | boolean, type: string}>}
+	 */
 	let settings = [];
 
 	onMount(async () => {
+		/**
+		 * @type {Array<{key: string, value: string }>}
+		 */
 		let all_settings = await settingsDB.getAllSettings();
 		settings = [
 			{
 				key: 'proxy',
-				value: all_settings.find((setting) => setting.key === 'proxy').value || '',
+				value: all_settings.find((setting) => setting.key === 'proxy')?.value || '',
 				type: 'text'
 			},
 			{
 				key: 'repo',
-				value: all_settings.find((setting) => setting.key === 'repo').value || '',
+				value: all_settings.find((setting) => setting.key === 'repo')?.value|| '',
 				type: 'text'
-			},
-			{
-				key: 'nsfw',
-				value: all_settings.find((setting) => setting.key === 'nsfw').value || false,
-				type: 'toggle'
 			}
+			// {
+			// 	key: 'nsfw',
+			// 	value: all_settings.find((setting) => setting.key === 'nsfw').value || false,
+			// 	type: 'toggle'
+			// }
 		];
 	});
 
+	/**
+	 * @param {{key: string, value: string | boolean}} setting
+	 */
 	function update(setting) {
 		settingsDB.updateSettings(setting.key, setting.value);
 	}

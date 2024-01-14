@@ -79,7 +79,8 @@
 				"resizable": false,
 				"decorations": false,
 				"url": "splashscreen.html",
-				"label": "splashscreen"
+				"label": "splashscreen",
+				"center": true
 			}
 		]
 	}

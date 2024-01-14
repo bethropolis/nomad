@@ -6,6 +6,7 @@ on:
 
 jobs:
   increment-version:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
 
     steps:
@@ -26,4 +27,4 @@ jobs:
         uses: mikeal/publish-to-github-action@master
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            BRANCH_NAME: 'dev'           
+            BRANCH_NAME: 'dev'  
