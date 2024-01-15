@@ -59,20 +59,21 @@
 			}
 		},
 		"security": {
-			"csp": "default-src 'self' *;"
+			"csp": "default-src 'self' *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src 'self' 'unsafe-inline' *;"
 		},
 		"updater": {
 			"active": false
 		},
 		"windows": [
 			{
-				"fullscreen": true,
-				"height": 600,
-				"width": 1024,
+				"fullscreen": false,
+				"height": 1000,
+				"width": 1600,
 				"resizable": true,
 				"title": "nomad streaming",
 				"userAgent": "Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0",
-				"visible": false
+				"visible": false,
+				"center": true
 			},
 			{
 				"width": 400,
