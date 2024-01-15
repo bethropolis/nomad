@@ -65,6 +65,23 @@ export class Controler {
         return await ext.latest(page);
     }
 
+ /**
+     * Retrieves the latest version of a package from the extension database.
+     *
+     * @param {string} pkg - The name of the package to retrieve.
+     * @param {number} page - The page number of the results to retrieve. Defaults to 1.
+     * @return {Promise<ListItem[]|undefined>} A promise that resolves to the latest version of the package.
+     */
+    async search(pkg, query = "", page = 1) {
+        const ext = await this.load(pkg);
+
+        if (!ext) return;
+
+        return await ext.search(query, page);
+    }
+
+
+
     /**
      * Asynchronously retrieves details for a given package and URL.
      *
@@ -80,6 +97,8 @@ export class Controler {
 
         return await ext.detail(data.url);
     }
+
+
 }
 
 const controler = new Controler();
