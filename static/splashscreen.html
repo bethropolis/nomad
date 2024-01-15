@@ -30,12 +30,13 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				height: 100vh;
+				height: 400px;
 				background-color: var(--background-default);
 				color: var(--text-default);
 				transition:
 					background-color 0.5s,
-					color 0.5s; /* Smooth transition for theme change */
+					color 0.5s; 
+				overflow: hidden;
 			}
 
 			.splash-container {
@@ -79,11 +80,8 @@
 		</div>
 
 		<script>
-			const splash_window = window.__TAURI__.window;
 			const invoke = window.__TAURI__.invoke;
 
-
-			splash_window.center()
 
 			const loadMainWindow = async () => {
 				let load = await invoke('close_splashscreen');
