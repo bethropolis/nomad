@@ -100,7 +100,7 @@ class Extension {
 			elements.map((element) => {
 				return {
 					element: $(element),
-					content: $(element).html()
+					content: $(element).html() 
 				};
 			})
 		);
@@ -134,20 +134,35 @@ class Extension {
 	 *
 	 * @param {string} html - The HTML content to search within.
 	 * @param {string} selector - The CSS selector to use for querying the element.
-	 * @return {Promise<Object>} - The element matching the provided selector.
+	 * @return {Object} - The element matching the provided selector.
 	 */
-	async querySelector(html, selector) {
-		console.log(selector);
-			const $ = await cheerio.load(html);
-			const element = $(selector);
+	 querySelector(html, selector) {
+		const $ = cheerio.load(html);
+		const element = $(selector);
 
-            
-			return {
-				element: element,
-				content: element.html(),
-                text: element.text(),
-				getAttributeText: (attribute = "") => element.attr(attribute) || ''
-			};
+		return {
+			element: element,
+			content: element.html(),
+			text: element.text(),
+			getAttributeText(selector ='') {
+				return element.attr(selector) || '';
+			}
+		};
+	}
+
+	queryXPath(html, xpath) {
+		const $ = cheerio.load(html);
+		const element = $(xpath);
+
+		return {
+			element: element,
+			content: element.html(),
+			text: element.text(),
+			attr: element.attr(),
+			getAttributeText(selector ='') {
+				return element.attr(selector) || '';
+			}
+		};
 	}
 
 	/**

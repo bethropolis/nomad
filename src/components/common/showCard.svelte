@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import { settingsDB } from './../../db/table/setting.js';
+	import { settingsDB } from '../../db/table/setting.js';
     export let title = '';
     export let cover = '';
 

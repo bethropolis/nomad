@@ -40,6 +40,7 @@
 		$details = event.detail;
 		goto('/details');
 	};
+
     
 </script>
 

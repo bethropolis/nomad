@@ -69,7 +69,7 @@ export default class ExtensionStore {
             script = `data:text/javascript;base64,${encode(script)}`;
 
             if (isClient()) {
-                import(script)
+                import(script/* @vite-ignore */)
                     .then((module) => {
                         const extension = new module.default();
 
