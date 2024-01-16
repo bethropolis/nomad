@@ -1,11 +1,8 @@
 <script >
-	import { page } from '$app/stores';
-	import { details } from '../../store/store';
 	import Details from '../../components/details/details.svelte';
+	import { sessionDB } from '../../store/session';
 
-    let selected = $details;
-
-	
+    let selected = sessionDB.getItem('details');
 </script>
 
 

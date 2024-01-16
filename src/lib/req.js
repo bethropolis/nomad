@@ -28,7 +28,7 @@ export async function request(url, options) {
     try {
 
         let proxy =await settingsDB.getSettings('proxy') || "";
-        url = proxy.value + encodeURI(url) ; 
+        url = proxy.value + url ; 
         const response = await axios(url, options);
         
         if (response.status === 200) {

@@ -38,7 +38,7 @@ export class Controler {
         let script = `data:text/javascript;base64,${encode(extension.script)}`;
 
         if (isClient()) {
-            const ext = await import(script).then((module) => {
+            const ext = await import(script/* @vite-ignore */).then((module) => {
                 const ext = new module.default();
 
                 Object.assign(ext, extension);

@@ -1,11 +1,12 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
 	import { searchQuery } from '../../store/store.js';
+	import { sessionDB } from "../../store/session";
 	import { Icon } from 'stwui';
-	import Ecard from './showCard.svelte';
+	import Ecard from '../common/showCard.svelte';
 	import controler from '$lib/controler';
 	import LoadingCards from '../common/loadingCards.svelte';
 	import { icons } from '$lib/icons';
+	import { goto } from '$app/navigation';
 	/**
 	 * @typedef {import("../../db/db").Extension} Extension
 	 * @typedef {import("../../types/extension").ListItem} ListItem
@@ -24,8 +25,6 @@
 	 * @type {Promise<ListItem[]>}
 	 */
 	let dataPromise;
-
-	let dispach = createEventDispatcher();
 
 	const getLatest = async () => {
 		return (await controler.latest(extension.package)) || [];
@@ -60,13 +59,20 @@
 	 * @param {string} item.url - The url of the item.
 	 * @returns {Promise<void>}
 	 */
-	const goTodetails = async (item) => {
-		dispach('details', { package: extension.package, url: item.url });
+	 const goTodetails = async (item) => {
+        await sessionDB.setItem('details', { package: extension.package, url: item.url });
 	};
+
+
+
+	const getMore = async () => {
+		sessionDB.setItem('package', extension.package);
+		goto('/search');
+	};
+
 
 	searchQuery.subscribe((value) => {
 		search = value;
-		console.log(search);
 	});
 
 	$: {
@@ -84,7 +90,7 @@
 			{extension.name}
 		</div>
 
-		<button class="px-3 py-1 flex items-center rounded-full hover:bg-gray-600/80 active:bg-gray-500">
+		<button class="px-3 py-1 flex items-center rounded-full hover:bg-gray-600/80 active:bg-gray-500"  on:click={getMore}>
 			<span>show more</span>
 			<Icon data={icons.next} />
 		</button>
