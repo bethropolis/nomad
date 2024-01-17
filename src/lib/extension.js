@@ -100,7 +100,7 @@ class Extension {
 			elements.map((element) => {
 				return {
 					element: $(element),
-					content: $(element).html() 
+					content: $(element).html()
 				};
 			})
 		);
@@ -136,7 +136,7 @@ class Extension {
 	 * @param {string} selector - The CSS selector to use for querying the element.
 	 * @return {Object} - The element matching the provided selector.
 	 */
-	 querySelector(html, selector) {
+	querySelector(html, selector) {
 		const $ = cheerio.load(html);
 		const element = $(selector);
 
@@ -144,12 +144,18 @@ class Extension {
 			element: element,
 			content: element.html(),
 			text: element.text(),
-			getAttributeText(selector ='') {
+			getAttributeText(selector = '') {
 				return element.attr(selector) || '';
 			}
 		};
 	}
 
+	/**
+	 * Queries for an element in the provided HTML using the given XPath.
+	 * @param {string} html - The HTML content to search within.
+	 * @param {string} xpath - The XPath to use for querying the element.
+	 * @return {Object} - The element matching the provided XPath.
+	 * */
 	queryXPath(html, xpath) {
 		const $ = cheerio.load(html);
 		const element = $(xpath);
@@ -159,7 +165,7 @@ class Extension {
 			content: element.html(),
 			text: element.text(),
 			attr: element.attr(),
-			getAttributeText(selector ='') {
+			getAttributeText(selector = '') {
 				return element.attr(selector) || '';
 			}
 		};

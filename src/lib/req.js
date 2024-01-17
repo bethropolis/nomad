@@ -21,14 +21,11 @@ import { settingsDB } from '../db/db';
  * @return {Promise<any>} A promise that resolves with the response data if the request is successful,
  *                   or rejects with an error if the request fails.
  */
-
-
-
 export async function request(url, options) {
     try {
 
-        let proxy =await settingsDB.getSettings('proxy') || "";
-        url = proxy.value + url ; 
+        let proxy =await settingsDB.getSettings('proxy');
+        url = proxy?.value + url ; 
         const response = await axios(url, options);
         
         if (response.status === 200) {
