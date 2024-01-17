@@ -52,6 +52,4 @@
 		{/each}
 	{/await}
 
-<style>
-	/* Your styles go here */
-</style>
+  

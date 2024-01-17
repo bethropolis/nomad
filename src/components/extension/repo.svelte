@@ -101,7 +101,7 @@
 	};
 </script>
 
-<main class="grid grid-cols-4 gap-4 w-full h-full overflow-auto p-10">
+<main class="grid grid-cols-4 gap-4 w-full h-full overflow-auto p-10 no-scrollbar">
 	{#await fetchData()}
 		<p>loading..</p>
 	{:then}
