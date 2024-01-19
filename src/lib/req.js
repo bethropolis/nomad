@@ -27,7 +27,7 @@ export async function request(url, options) {
 	url = proxy?.value + url;
     let response;
 	try {
-		if ('__TAURI__' in window) {
+		if (window.__TAURI__) {	
 			response = await invoke('make_request', { url, options });
 		} else {
 			response = await axios(url, options);

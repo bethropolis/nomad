@@ -96,15 +96,6 @@ class Extension {
 		const $ = cheerio.load(html);
 		let elements = $(selector).toArray();
 
-		console.log(
-			elements.map((element) => {
-				return {
-					element: $(element),
-					content: $(element).html()
-				};
-			})
-		);
-
 		return elements.map((element) => {
 			return {
 				element: $(element),
