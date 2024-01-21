@@ -2,13 +2,16 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod req;
-
+use req::request;
+use req::CustomRequestOptions;
 use tauri::{Manager, Window};
 
 #[tauri::command]
-async fn make_request(url: String, options: req::CustomRequestOptions) -> Result<String, String> {
-    // Use the make_request_impl function from the request_handler module
-    req::make_request_impl(url, options).await
+async fn make_request(url: String, options: CustomRequestOptions) -> Result<String, String> {
+    match request(&url, options).await {
+        Ok(response_data) => Ok(response_data),
+        Err(e) => Err(format!("Error: {}", e)),
+    }
 }
 
 #[tauri::command]

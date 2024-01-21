@@ -30,11 +30,11 @@ export async function request(url, options) {
 		if (window.__TAURI__) {	
 			response = await invoke('make_request', { url, options });
 		} else {
-			response = await axios(url, options);
+			response = (await axios(url, options)).data;
 		}
 
 		if (response.status === 200) {
-			return response.data;
+			return response;
 		} else {
 			throw new Error('Failed to fetch manga list');
 		}
