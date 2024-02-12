@@ -2832,10 +2832,10 @@ strip-json-comments@^3.1.1:
   resolved "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-3.1.1.tgz"
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
 
-stwui@^0.20.0-next:
-  version "0.20.0-next"
-  resolved "https://registry.yarnpkg.com/stwui/-/stwui-0.20.0-next.tgz#edc15dcf337e32f1530ed0e6067bf42de31110a6"
-  integrity sha512-3YQb2lD1zXJLlsn3bVUSPinVNkK1T3FjWrhBKS2LuZpaKmZOSeyLgTUWHu5HvQW8O6u1NfL7eIu0SBBEZ/FFZA==
+stwui@^0.21.0-next:
+  version "0.21.0-next"
+  resolved "https://registry.yarnpkg.com/stwui/-/stwui-0.21.0-next.tgz#42484e2336a845f4853103040eb7b5d6a335c86f"
+  integrity sha512-aTddozHbFJCgvwaANO9tcmGW/6juB63aHdFN0EoiFmTVqHiBfiWULS/IY6x8j1VmbdIRIH80QBRdxqSOl78NdA==
   dependencies:
     "@floating-ui/dom" "^1.5.3"
     color "^4.2.3"
