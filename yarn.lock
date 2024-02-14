@@ -2397,6 +2397,14 @@ postcss-load-config@^4.0.1:
     lilconfig "^3.0.0"
     yaml "^2.3.4"
 
+postcss-load-config@^5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/postcss-load-config/-/postcss-load-config-5.0.3.tgz#f4927637d907de900c4828615077646844545820"
+  integrity sha512-90pBBI5apUVruIEdCxZic93Wm+i9fTrp7TXbgdUCH+/L+2WnfpITSpq5dFU/IPvbv7aNiMlQISpUkAm3fEcvgQ==
+  dependencies:
+    lilconfig "^3.0.0"
+    yaml "^2.3.4"
+
 postcss-nested@^6.0.1:
   version "6.0.1"
   resolved "https://registry.npmjs.org/postcss-nested/-/postcss-nested-6.0.1.tgz"
