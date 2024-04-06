@@ -1,6 +1,6 @@
 {
 	"name": "watch",
-	"version": "0.1.22",
+	"version": "0.1.24",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
@@ -11,7 +11,8 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
-		"tauri": "tauri"
+		"tauri": "tauri",
+		"test": "vitest"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.1.1",
