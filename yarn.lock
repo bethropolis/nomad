@@ -2115,10 +2115,10 @@ mkdirp@^0.5.1:
   dependencies:
     minimist "^1.2.6"
 
-mobx@^6.12.0:
-  version "6.12.0"
-  resolved "https://registry.npmjs.org/mobx/-/mobx-6.12.0.tgz"
-  integrity sha512-Mn6CN6meXEnMa0a5u6a5+RKrqRedHBhZGd15AWLk9O6uFY4KYHzImdt8JI8WODo1bjTSRnwXhJox+FCUZhCKCQ==
+mobx@^6.12.4:
+  version "6.12.4"
+  resolved "https://registry.yarnpkg.com/mobx/-/mobx-6.12.4.tgz#a1e176cd173bf45d3e5eb825eaff2c736c0a90cb"
+  integrity sha512-uIymg89x+HmItX1p3MG+d09irn2k63J6biftZ5Ok+UpNojS1I3NJPLfcmJT9ANnUltNlHi+HQqrVyxiAN8ISYg==
 
 modify-values@^1.0.0:
   version "1.0.1"
