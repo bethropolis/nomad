@@ -16,7 +16,7 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.2.2",
-		"@sveltejs/adapter-static": "^3.0.1",
+		"@sveltejs/adapter-static": "^3.0.2",
 		"@sveltejs/kit": "^2.5.4",
 		"@tauri-apps/cli": "^1.5.14",
 		"autoprefixer": "^10.4.18",
