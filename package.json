@@ -41,7 +41,7 @@
 		"@tailwindcss/forms": "^0.5.7",
 		"@tauri-apps/api": "^1.6.0",
 		"axios": "^1.15.2",
-		"cheerio": "^1.0.0-rc.12",
+		"cheerio": "^1.2.0",
 		"dexie": "^4.0.7",
 		"dotenv": "^16.4.5",
 		"js-base64": "^3.7.7",
